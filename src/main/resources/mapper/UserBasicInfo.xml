@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lhn.myqz.dao.UserBasicInfoDao">
+    <select id="queryUserBasicInfo" resultType="com.lhn.myqz.entity.UserBasicInfo">
+
+	</select>
+    <select id="queryUserBasicInfoByAccountNumber" resultType="com.lhn.myqz.entity.UserBasicInfo"
+            parameterType="com.lhn.myqz.entity.UserBasicInfo">
+		<if test="accountNumber!=null and password==null">
+		    SELECT head_portrait,nick_name,personal_signature,sex,age,constellation,occupation,whisper
+		    FROM tb_user_basic_info
+		    WHERE account_number=#{accountNumber}
+		</if>
+		<if test="accountNumber!=null and password!=null">
+		    SELECT account_number,password
+		    FROM tb_user_basic_info
+		    WHERE account_number=#{accountNumber} and password=#{password}
+		</if>
+	</select>
+    <insert id="insertUserBasicInfo" parameterType="com.lhn.myqz.entity.UserBasicInfo">
+        INSERT INTO tb_user_basic_info(
+            account_number,password,head_portrait,nick_name,personal_signature,
+            sex,age,constellation,occupation,whisper
+        )
+        VALUES(
+            #{accountNumber},#{password},#{headPortrait},#{nickName},
+            #{personalSignature},#{sex},#{age},#{constellation},#{occupation},#{whisper}
+		)
+	</insert>
+    <update id="updateUserBasicInfo" parameterType="com.lhn.myqz.entity.UserBasicInfo">
+        update tb_user_basic_info
+        set nick_name=#{nickName},personal_signature=#{personalSignature},sex=#{sex},age=#{age},
+            constellation=#{constellation},occupation=#{occupation},whisper=#{whisper}
+        where account_number=#{accountNumber}
+    </update>
+    <delete id="deleteUserBasicInfo" parameterType="com.lhn.myqz.entity.UserBasicInfo">
+
+    </delete>
+</mapper>

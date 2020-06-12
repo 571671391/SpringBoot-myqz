@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lhn.myqz.dao.UserFriendDao">
+    <select id="queryUserFriendByAccountNumber" resultType="com.lhn.myqz.entity.UserFriend"
+            parameterType="java.lang.String">
+        select a.id,a.account_number,b.friend_account_number,a.nick_name,b.groupings
+        from tb_user_basic_info  a,(select friend_account_number,groupings
+                                    from tb_friend
+                                    where account_number = #{accountNumber})  b
+        where b.friend_account_number = a.account_number
+    </select>
+
+    <select id="queryUserFriendYorN"  resultType="java.lang.Integer"
+            parameterType="java.lang.String">
+        select count(*) from tb_friend
+        where account_number = #{accountNumber}
+        and friend_account_number = #{friendAccountNumber}
+    </select>
+
+    <insert id="insertUserFriend" parameterType="com.lhn.myqz.entity.UserFriend">
+        insert into tb_friend(
+            account_number,friend_account_number,groupings
+        )values(
+            #{accountNumber},#{friendAccountNumber},#{groupings}
+        )
+	</insert>
+
+    <update id="updateUserFriend" parameterType="java.lang.String">
+        update tb_friend
+        set groupings="我的好友"
+        where account_number=#{accountNumber}
+        and groupings=#{groupings}
+    </update>
+
+    <update id="updateUserFriendById" parameterType="com.lhn.myqz.entity.UserFriend">
+        update tb_friend
+        set groupings=#{groupings}
+        where id=#{id}
+    </update>
+
+    <delete id="deleteUserFriendById" parameterType="java.lang.Integer">
+        delete from tb_friend where id=#{id}
+    </delete>
+</mapper>

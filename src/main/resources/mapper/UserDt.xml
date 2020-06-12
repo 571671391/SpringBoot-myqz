@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lhn.myqz.dao.UserDtDao">
+    <select id="queryUserDtByAccountNumber" resultType="com.lhn.myqz.entity.UserDt"
+            parameterType="java.lang.String">
+        select dt.id, info.account_number, info.head_portrait, info.nick_name,
+               dt.create_time, dt.dt_content, dt.dt_img, dt.dt_popularity
+        from tb_user_basic_info info,tb_user_dt dt
+        where 1=1
+        <choose>
+            <when test="friendAccountNumber == null or friendAccountNumber == ''">
+                and dt.account_number in (
+                select friend_account_number
+                from tb_friend
+                where account_number = #{accountNumber}
+                <if test="selected != null and selected != ''">
+                    and groupings = #{selected}
+                </if>
+                )
+                and dt.account_number = info.account_number
+            </when>
+            <otherwise>
+                and dt.account_number = #{friendAccountNumber}
+                and info.account_number = #{friendAccountNumber}
+            </otherwise>
+        </choose>
+        order by dt.id desc
+    </select>
+
+    <insert id="insertUserDt" parameterType="com.lhn.myqz.entity.UserDt">
+        insert into tb_user_dt(
+            account_number,create_time,dt_content
+            <if test="dtImg!=null">,dt_img</if>
+            <if test="dtPopularity!=null">,dt_popularity</if>
+        )
+        values(
+            #{accountNumber},#{createTime},#{dtContent}
+            <if test="dtImg!=null">,#{dtImg}</if>
+            <if test="dtPopularity!=null">,#{dtPopularity}</if>
+        )
+	</insert>
+
+    <!-- 根据ID修改dt数据
+    <update id="updateUserDt" parameterType="com.lhn.myqz.entity.UserDt">
+       update tb_user_dt set
+       account_number=#{accountNumber},create_time=#{createTime},dt_content=#{dtContent},
+       dt_img=#{dtImg},dt_popularity=#{dtPopularity}
+       where id=#{id}
+    </update>-->
+
+    <delete id="deleteUserDt" parameterType="java.lang.Integer">
+    </delete>
+</mapper>

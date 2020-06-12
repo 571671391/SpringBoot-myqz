@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lhn.myqz.dao.UserZplDao">
+    <select id="queryUserZplByAccountNumber" resultType="com.lhn.myqz.entity.UserZpl">
+        select a.id, a.tpl_id, a.head_portrait, a.left_account_number,b.right_account_number,
+               a.nick_name as left_nick_name,b.nick_name as right_nick_name,
+               a.zpl_content,a.create_time
+        from (
+            select zpl.id,zpl.tpl_id, zpl.left_account_number, info.head_portrait,
+                   info.nick_name,zpl.create_time, zpl.zpl_content
+            from tb_user_basic_info info,tb_user_zpl zpl
+            where zpl.left_account_number = info.account_number
+            ) a,
+            (
+            select zpl.id,zpl.right_account_number,info.nick_name
+            from tb_user_basic_info info,tb_user_zpl zpl
+            where zpl.right_account_number = info.account_number
+            ) b
+        where a.id = b.id
+        order by a.id asc
+    </select>
+    <insert id="insertUserZpl" parameterType="com.lhn.myqz.entity.UserZpl">
+        insert into tb_user_zpl(
+            tpl_id,left_account_number,right_account_number,zpl_content,create_time
+        )
+        values(
+            #{tplId},#{leftAccountNumber},#{rightAccountNumber},#{zplContent},#{createTime}
+        )
+	</insert>
+
+    <delete id="deleteUserZpl" parameterType="java.lang.Integer">
+
+    </delete>
+</mapper>

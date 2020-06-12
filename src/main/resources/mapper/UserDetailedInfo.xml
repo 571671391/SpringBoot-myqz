@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lhn.myqz.dao.UserDetailedInfoDao">
+    <select id="queryUserDetailedInfo" resultType="com.lhn.myqz.entity.UserDetailedInfo">
+
+    </select>
+    <select id="queryUserDetailedInfoByAccountNumber" resultType="com.lhn.myqz.entity.UserDetailedInfo"
+            parameterType="java.lang.String">
+        select id,account_number,name,interest,lucky_number,favorite_games,
+               favorite_dishes,self_description,hometown,phone
+        from tb_user_detailed_info
+        where account_number = #{friendAccountNumber}
+        limit 1
+    </select>
+    <insert id="insertUserDetailedInfo" parameterType="com.lhn.myqz.entity.UserDetailedInfo">
+        insert into tb_user_detailed_info(
+            account_number,name,interest,lucky_number,favorite_games,
+            favorite_dishes,self_description,hometown,phone
+        )values(
+            #{accountNumber},#{name},#{interest},#{luckyNumber},#{favoriteGames},
+            #{favoriteDishes},#{selfDescription},#{hometown},#{phone}
+        )
+	</insert>
+    <update id="updateUserDetailedInfo" parameterType="com.lhn.myqz.entity.UserDetailedInfo">
+        update tb_user_detailed_info
+        set name=#{name},interest=#{interest},lucky_number=#{luckyNumber},
+            favorite_games=#{favoriteGames},favorite_dishes=#{favoriteDishes},
+            self_description=#{selfDescription},hometown=#{hometown},phone=#{phone}
+        where account_number=#{accountNumber}
+    </update>
+</mapper>

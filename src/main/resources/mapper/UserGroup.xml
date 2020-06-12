@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lhn.myqz.dao.UserGroupDao">
+    <select id="queryUserGroupByAccountNumber" resultType="com.lhn.myqz.entity.UserGroup"
+            parameterType="java.lang.String">
+        select id,groupings
+        from tb_group
+        where account_number = #{accountNumber}
+    </select>
+
+    <update id="updateUserGroupById" parameterType="com.lhn.myqz.entity.UserGroup">
+        update tb_group
+        set groupings=#{groupings}
+        where id=#{id}
+    </update>
+
+    <insert id="insertUserGroup" parameterType="com.lhn.myqz.entity.UserGroup">
+        insert into tb_group(
+            account_number,groupings
+        )values(
+            #{accountNumber},#{groupings}
+        )
+    </insert>
+
+    <delete id="deleteUserGroupById" parameterType="java.lang.Integer">
+        delete from tb_group where id=#{id}
+    </delete>
+</mapper>

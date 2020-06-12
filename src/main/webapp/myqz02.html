@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>QZ记录你的美好</title>
+    <script type="text/javascript" src="../resources/static/js/jquery.min.js"></script>
+    <script type="text/javascript" src="../resources/static/layui/layui.js"></script>
+    <script type="text/javascript" src="../resources/static/js/vue.js"></script>
+    <script type="text/javascript" src="../resources/static/js/axios.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../resources/static/layui/css/layui.css">
+    <style type="text/css">
+        html {
+            height: 100%;
+        }
+
+        body {
+            background: url(../resources/static/images/myqz02.gif) no-repeat center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+            overflow-y: auto;
+        }
+
+        .wrap {
+            height: auto;
+            width: 1210px;
+            position: absolute;
+            opacity: 100%;
+            margin: 5% 10% 0 10%;
+            margin-bottom: 200px;
+        }
+
+        .wrap-tx {
+            float: left;
+            height: auto;
+            width: 10%;
+            border: 2px solid white;
+            margin: 1% 0 1% 8%;
+        }
+
+        .wrap-ifo {
+            float: left;
+            height: 126px;
+            width: 70%;
+            opacity: 100%;
+            margin: 1% 0 1% 3%;
+            font-size: 32px;
+            color: white;
+        }
+
+        .gxqm {
+            margin: 15px 0 0 5%;
+            font-size: 23px;
+        }
+
+        .user-ifo p {
+            margin: 15px 0 0 5%;
+            float: left;
+            font-size: 16px;
+        }
+
+        .wrap-hy {
+            float: left;
+            height: auto;
+            width: 20%;
+            background-color: rgba(255, 255, 255, 0);
+            margin: 1% 0 1% 8%;
+        }
+
+        .wrap-hy div {
+            height: 30px;
+            font-size: 20px;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.25);
+        }
+
+        .wrap-hy p {
+            height: 26px;
+            font-size: 17px;
+            margin: 2px 0 0 0;
+            background-color: rgba(0, 0, 0, 0.25);
+            color: white;
+        }
+
+        .wrap-dt {
+            float: left;
+            height: auto;
+            width: 60.4%;
+            color: rgb(255, 255, 255);
+            background-color: rgba(0, 0, 0, 0.25);
+            margin: 1% 0 1% 3%;
+        }
+
+        .create-dt01 button {
+            height: 68px;
+            width: 62px;
+            font-size: 25px
+        }
+
+        .create-dt03 textarea {
+            height: 100%;
+            width: 100%;
+        }
+
+        .dt-img {
+            display: none;
+            height: auto;
+            width: 100%;
+        }
+
+        .dt-img img {
+            height: 350px;
+            width: 400px;
+            margin: 2px 0 0 2px;
+        }
+
+        .dt-content {
+            float: left;
+            margin: 10px 0 50px 0;
+            height: auto;
+            width: 100%;
+        }
+
+        .dt-content01 {
+            float: left;
+            margin: 10px 0 0 10px;
+            height: 50px;
+            width: 50px;
+        }
+
+        .dt-content01 img {
+            height: 50px;
+            width: 50px;
+        }
+
+        .dt-content02 {
+            float: left;
+            margin: 10px 0 0 10px;
+            height: 50px;
+            width: 90%;
+        }
+
+        .dt-content02 p {
+            margin: 2px 0 0 0;
+        }
+
+        .dt-content03 {
+            float: left;
+            margin: 10px 0 0 10px;
+            height: auto;
+            width: 98%;
+            font-size: 18px;
+        }
+
+        .dt-content04 {
+            float: left;
+            margin: 10px 0 0 10px;
+            height: auto;
+            width: 98%;
+        }
+
+        .dt-content04 img {
+            height: 300px;
+            width: 300px;
+        }
+
+        .dt-content05 {
+            float: left;
+            margin: 10px 0 0 10px;
+            height: auto;
+            width: 98%;
+        }
+
+        .dt-content05 .a1 {
+            float: right;
+            margin: 0 10px 0 0;
+        }
+
+        .dt-content05 .a2 {
+            margin: 0 0 0 500px;
+        }
+
+        .dt-content06 {
+            float: left;
+            margin: 10px 0 0 10px;
+            height: auto;
+            width: 98%;
+        }
+
+        .tpl-img {
+            float: left;
+            height: auto;
+            width: 45px;
+        }
+
+        .tpl-img img {
+            height: 45px;
+            width: 45px;
+        }
+
+        .tpl-content {
+            float: left;
+            height: auto;
+            width: 92%;
+            margin: 0 0 0 10px;
+        }
+
+        .p1 {
+            float: left;
+            font-size: 18px;
+        }
+
+        .p2 {
+            font-size: 18px;
+        }
+
+        .p3 {
+            float: left;
+            font-size: 16px;
+            margin: 5px 0 0 0;
+        }
+
+        .p4 {
+            margin: 5px 0 0 160px;
+        }
+
+        .p5 textarea {
+            width: 100%;
+        }
+
+        .hf {
+            float: left;
+            height: auto;
+            width: 92%;
+            margin: 10px 0 0 55px;
+        }
+
+        .hf-img {
+            float: left;
+            height: auto;
+            width: 45px;
+        }
+
+        .hf-img img {
+            height: 45px;
+            width: 45px;
+        }
+
+        .hf-content {
+            margin: 0 0 0 10px;
+            float: left;
+            height: auto;
+            width: 91.5%;
+        }
+
+        .fbpl {
+            height: auto;
+        }
+
+        .p6 {
+            width: 100%;
+        }
+
+        .p6 textarea {
+            margin: 50px 0 0 0;
+            width: 99.8%;
+            height: 60px;
+        }
+
+        .p6 input {
+            float: right;
+            width: 60px;
+        }
+
+    </style>
+</head>
+<body bgcolor="white">
+<div class="wrap" id="wrap">
+    <div class="wrap-tx">
+        <img :src="userBasicInfo.headPortrait" height="121" width="122">
+    </div>
+    <div class="wrap-ifo">{{ userBasicInfo.nickName }}
+        <span>
+            <p class="gxqm">{{ userBasicInfo.personalSignature }}</p>
+        </span>
+        <span class="user-ifo">
+            <p>{{ userBasicInfo.sex }}</p>
+            <p>{{ userBasicInfo.age }}</p>
+            <p>{{ userBasicInfo.constellation }}</p>
+            <p>{{ userBasicInfo.occupation }}</p>
+            <p>{{ userBasicInfo.whisper }}</p>
+        </span>
+    </div>
+    <div class="wrap-hy">
+        <div>个人档案</div>
+        <p>姓名：{{ userDetailedInfo.name }}</p>
+        <p>兴趣：{{ userDetailedInfo.interest }}</p>
+        <p>幸运数字：{{ userDetailedInfo.luckyNumber }}</p>
+        <p>最喜欢的游戏：{{ userDetailedInfo.favoriteGames }}</p>
+        <p>最喜欢的一道菜：{{ userDetailedInfo.favoriteDishes }}</p>
+        <p>自我描述：{{ userDetailedInfo.selfDescription }}</p>
+        <p>家乡：{{ userDetailedInfo.hometown }}</p>
+        <p>联系电话：{{ userDetailedInfo.phone }}</p>
+    </div>
+    <div class="wrap-dt">
+        <div class="dt-content" v-for="(dt,dtdex) in userDt">
+            <div class="dt-content01">
+                <img :src="dt.headPortrait">
+            </div>
+            <div class="dt-content02">
+                <p style="font-size: 20px">{{ dt.nickName }}</p>
+                <p style="font-size: 15px">{{ dt.createTime }}</p>
+            </div>
+            <div class="dt-content03">
+                {{ dt.dtContent }}
+            </div>
+            <div class="dt-content04">
+                <img :src="dt.dtImg">
+            </div>
+            <div class="dt-content05">
+                <a :id="'b1'+dtdex" class="layui-icon layui-icon-dialogue a1" style="font-size: 28px;color: #b4b4b4;"
+                   @mouseenter="aChange('b1',dtdex)"
+                   @mouseleave="aRecovery('b1',dtdex)"
+                   @click="toFocus('b1',dtdex)">
+                    &nbsp;
+                </a>
+                <a :id="'b2'+dtdex" class="layui-icon layui-icon-praise a2" style="font-size: 28px; color: #b4b4b4;"
+                   @mouseenter="aChange('b2',dtdex)"
+                   @mouseleave="aRecovery('b2',dtdex)"
+                   @click.once="hot('b2',dtdex)">
+                    {{ dt.dtPopularity }}
+                </a>
+            </div>
+            <div class="dt-content06" v-for="(tpl,tpldex) in dt.userTplList">
+                <div class="tpl-img">
+                    <img :src="tpl.headPortrait">
+                </div>
+                <div class="tpl-content" @mouseenter="aShow(dtdex,tpldex,null)"
+                     @mouseleave="aHide(dtdex,tpldex,null)">
+                    <p class="p1">{{ tpl.nickName }}</p>
+                    <p class="p1">:</p>
+                    <p class="p2">{{ tpl.tplContent }}</p>
+                    <p class="p3">{{ tpl.createTime }}</p>
+                    <p class="p4">
+                        <a :id="'a'+dtdex+tpldex" @click="pShow(dtdex,tpldex,null)"
+                           class="layui-icon layui-icon-dialogue" style="color: white;display: none">
+                        </a>
+                    </p>
+                    <p :id="'p'+dtdex+tpldex" class="p5" style="display: none">
+                        <textarea :id="''+dtdex+tpldex" @blur="pHide(dtdex,tpldex,null)">
+                        </textarea>
+                        <input type="button" value="发表" @click="fbpl(dtdex,tpldex,null)">
+                    </p>
+                </div>
+                <div class="hf" v-for="(zpl,zpldex) in tpl.userZplList">
+                    <div class="hf-img">
+                        <img :src="zpl.headPortrait">
+                    </div>
+                    <div class="hf-content" @mouseenter="aShow(dtdex,tpldex,zpldex)"
+                         @mouseleave="aHide(dtdex,tpldex,zpldex)">
+                        <p class="p1">{{ zpl.leftNickName }}</p>
+                        <p class="p1" style="color: #FFFF00">回复</p>
+                        <p class="p1">{{ zpl.rightNickName }}</p>
+                        <p class="p1">:</p>
+                        <p class="p2">{{ zpl.zplContent }}</p>
+                        <p class="p3">{{ zpl.createTime }}</p>
+                        <p class="p4">
+                            <a :id="'a'+dtdex+tpldex+zpldex" @click="pShow(dtdex,tpldex,zpldex)"
+                               class="layui-icon layui-icon-dialogue" style="color: white;display: none"></a>
+                        </p>
+                        <p :id="'p'+dtdex+tpldex+zpldex" class="p5" style="display: none">
+                            <textarea :id="''+dtdex+tpldex+zpldex" @blur="pHide(dtdex,tpldex,zpldex)">
+                            </textarea>
+                            <input type="button" value="发表" @click="fbpl(dtdex,tpldex,zpldex)">
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="fbpl">
+                <p class="p6">
+                    <textarea :id="''+dtdex"></textarea>
+                    <input type="button" value="发表" @click="fbpl(dtdex,null,null)">
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    layui.use('element', function () {
+        var element = layui.element;
+        //…
+    });
+
+    var vm = new Vue({
+        el: "#wrap",
+        data: {
+            accountNumber: "",
+            friendAccountNumber: "",
+            selected: "",
+
+            //页面初始化数据
+            user: {},  //当前用户数据
+            userBasicInfo: {},  //访问的用户的基本信息
+            userDetailedInfo: {},  //访问的用户的详细信息
+            userDt: []   //访问的用户的动态
+        },
+        beforeMount() {
+            var url = location.search //获取url中"?"符后的字串
+            var user = new Object()
+            if (url.indexOf('?') != -1) {
+                var str = url.substr(1) //substr()方法返回从参数值开始到结束的字符串；
+                var strs = str.split('&')
+                for (var i = 0; i < strs.length; i++) {
+                    user[strs[i].split('=')[0]] = strs[i].split('=')[1]
+                }
+            }
+            this.accountNumber = user.accountNumber;
+            this.friendAccountNumber = user.friendAccountNumber;
+            this.getUserData();
+        },
+        methods: {
+            getUserData() {
+                var that = this;
+                axios.post('http://localhost:8888/myqz/dataUser/queryAll02?accountNumber='
+                    + this.accountNumber
+                    + '&selected=' + this.selected
+                    + '&friendAccountNumber=' + this.friendAccountNumber, {}
+                ).then(function (response) {
+                    that.user = response.data.userBasicInfo01;
+                    that.userBasicInfo = response.data.userBasicInfo02;
+                    that.userDetailedInfo = response.data.userDetailedInfo;
+                    that.userDt = response.data.userDt;
+                    console.log(response.data);
+                }).catch(function (error) {
+                    console.log(error.data);
+                });
+            },
+            getTime() {
+                var dt = new Date();
+                var y = dt.getFullYear();
+                var m = (dt.getMonth() + 1).toString().padStart(2, '0');
+                var d = dt.getDate().toString().padStart(2, '0');
+                var hh = dt.getHours().toString().padStart(2, '0');
+                var mm = dt.getMinutes().toString().padStart(2, '0');
+                var ss = dt.getSeconds().toString().padStart(2, '0');
+                return y + "/" + m + "/" + d + " " + hh + ":" + mm + ":" + ss;
+            },
+            fbpl(dtdex, tpldex, zpldex) {
+                var str = "" + dtdex;
+                if (tpldex != null) {
+                    str = str + tpldex;
+                    var rightAccountNumber = null;
+                    var rightNickName = null;
+                    if (zpldex != null) {
+                        str = str + zpldex;
+                        rightAccountNumber = this.userDt[dtdex].userTplList[tpldex].userZplList[zpldex].leftAccountNumber;
+                        rightNickName = this.userDt[dtdex].userTplList[tpldex].userZplList[zpldex].leftNickName;
+                    } else {
+                        rightAccountNumber = this.userDt[dtdex].userTplList[tpldex].accountNumber;
+                        rightNickName = this.userDt[dtdex].userTplList[tpldex].nickName;
+                    }
+                    //zpl
+                    var that = this;
+                    var zplContent = $("#" + str).val();
+                    var zpl = {
+                        id: "", tplId: this.userDt[dtdex].userTplList[tpldex].id,
+                        leftAccountNumber: this.accountNumber, rightAccountNumber: rightAccountNumber,
+                        zplContent: zplContent, createTime: this.getTime(),
+                        headPortrait: this.user.headPortrait,
+                        leftNickName: this.user.nickName, rightNickName: rightNickName
+                    };
+                    axios.post('http://localhost:8888/myqz/zplData/insert', {
+                        tplId: that.userDt[dtdex].userTplList[tpldex].id,
+                        leftAccountNumber: zpl.leftAccountNumber,
+                        rightAccountNumber: zpl.rightAccountNumber,
+                        createTime: zpl.createTime,
+                        zplContent: zplContent
+                    }).then(function (response) {
+                        that.userDt[dtdex].userTplList[tpldex].userZplList.push(zpl);
+                        $("#" + str).val("");
+                    }).catch(function (error) {
+                        console.log(error);
+                    });
+                } else {
+                    //tpl
+                    var that = this;
+                    var tplContent = $("#" + str).val();
+                    var tpl = {
+                        id: "", dtId: this.userDt[dtdex].id, accountNumber: this.accountNumber,
+                        tplContent: tplContent, createTime: this.getTime(),
+                        headPortrait: this.user.headPortrait, nickName: this.user.nickName,
+                        userZplList: []
+                    };
+                    axios.post('http://localhost:8888/myqz/tplData/insert', {
+                        dtId: that.userDt[dtdex].id,
+                        accountNumber: that.accountNumber,
+                        createTime: tpl.createTime,
+                        tplContent: tplContent
+                    }).then(function (response) {
+                        that.userDt[dtdex].userTplList.push(tpl);
+                        $("#" + str).val("");
+                    }).catch(function (error) {
+                        console.log(error);
+                    });
+                }
+            },
+            aChange(opt, dtdex) {
+                document.getElementById(opt + dtdex).style.color = "white";
+            },
+            aRecovery(opt, dtdex) {
+                document.getElementById(opt + dtdex).style.color = "#b4b4b4";
+            },
+            hot(opt, dtdex) {
+                var that = this;
+                axios.post('http://localhost:8888/myqz/dtData/update', {
+                    id: that.userDt[dtdex].id,
+                    accountNumber: that.accountNumber,
+                    createTime: that.userDt[dtdex].createTime,
+                    dtContent: that.userDt[dtdex].dtContent,
+                    dtImg: that.userDt[dtdex].dtImg,
+                    dtPopularity: parseInt(that.userDt[dtdex].dtPopularity) + 1
+                }).then(function (response) {
+                    that.userDt[dtdex].dtPopularity = parseInt(that.userDt[dtdex].dtPopularity) + 1;
+                }).catch(function (error) {
+                    console.log(error);
+                });
+            },
+            toFocus(opt, dtdex) {
+                document.getElementById(dtdex).focus();
+            },
+            aShow(dtdex, tpldex, zpldex) {
+                var str = "a" + dtdex + tpldex;
+                var accountNumber01 = this.userDt[dtdex].userTplList[tpldex].accountNumber;
+                if (zpldex != null) {
+                    str = str + zpldex;
+                    accountNumber01 = this.userDt[dtdex].userTplList[tpldex].userZplList[zpldex].leftAccountNumber;
+                }
+                if (this.accountNumber == accountNumber01) {
+                    return;
+                } else {
+                    document.getElementById(str).style.display = "block";
+                }
+            },
+            aHide(dtdex, tpldex, zpldex) {
+                var str = "a" + dtdex;
+                if (tpldex != null) {
+                    str = str + tpldex;
+                    if (zpldex != null) {
+                        str = str + zpldex;
+                    }
+                }
+                document.getElementById(str).style.display = "none";
+            },
+            pShow(dtdex, tpldex, zpldex) {
+                var str = "p" + dtdex;
+                var str1 = "" + dtdex;
+                if (tpldex != null) {
+                    str = str + tpldex;
+                    str1 = str1 + tpldex;
+                    if (zpldex != null) {
+                        str = str + zpldex;
+                        str1 = str1 + zpldex;
+                    }
+                }
+                document.getElementById(str).style.display = "block";
+                document.getElementById(str1).focus();
+            },
+            pHide(dtdex, tpldex, zpldex) {
+                var str = "p" + dtdex;
+                if (tpldex != null) {
+                    str = str + tpldex;
+                    if (zpldex != null) {
+                        str = str + zpldex;
+                    }
+                }
+                setTimeout(function () {
+                    document.getElementById(str).style.display = "none";
+                }, 100);
+            },
+        },
+
+    });
+</script>
+</body>
+</html>

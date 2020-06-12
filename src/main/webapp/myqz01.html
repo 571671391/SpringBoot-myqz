@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>QZ个人空间</title>
+    <script type="text/javascript" src="../resources/static/js/jquery.min.js"></script>
+    <script type="text/javascript" src="../resources/static/layui/layui.js"></script>
+    <script type="text/javascript" src="../resources/static/js/vue.js"></script>
+    <script type="text/javascript" src="../resources/static/js/axios.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../resources/static/layui/css/layui.css">
+    <style type="text/css">
+        html {
+            height: 100%;
+        }
+
+        body {
+            background: url(../resources/static/images/myqz01.jpg) no-repeat center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+            overflow-y: auto;
+        }
+
+        .wrap {
+            height: auto;
+            width: 1210px;
+            /*position:relative;*/
+            position: absolute;
+            /*background-color: #555555;*/
+            opacity: 100%;
+            margin: 5% 10% 0 10%;
+            margin-bottom: 200px;
+        }
+
+        .wrap-tx {
+            float: left;
+            height: auto;
+            width: 10%;
+            border: 2px solid white;
+            margin: 1% 0 1% 1.5%;
+        }
+
+        .wrap-ifo {
+            float: left;
+            height: 126px;
+            width: 70%;
+            opacity: 100%;
+            margin: 1% 0 1% 3%;
+            font-size: 32px;
+            color: white;
+        }
+
+        .gxqm {
+            margin: 15px 0 0 5%;
+            font-size: 23px;
+        }
+
+        .user-ifo p {
+            margin: 15px 0 0 5%;
+            float: left;
+            font-size: 16px;
+        }
+
+        .wrap-dz {
+            float: left;
+            height: auto;
+            width: 10%;
+            border: 2px solid white;
+            margin: 1% 0 1% 3%;
+        }
+
+        .wrap-hy {
+            float: left;
+            height: auto;
+            width: 15%;
+            background-color: white;
+            margin: 1% 0 1% 1.5%;
+        }
+
+        .ia {
+            float: right;
+            color: #ff0000;
+        }
+
+        .ib {
+            float: right;
+            color: #1E9FFF;
+            margin-right: 5px;
+        }
+
+        .wrap-dt {
+            float: left;
+            height: auto;
+            width: 60.4%;
+            color: rgb(255, 255, 255);
+            background-color: rgba(0, 0, 0, 0.25);
+            margin: 1% 0 1% 3%;
+        }
+
+        .create-dt {
+            height: 68px;
+            width: 100%;
+        }
+
+        .create-dt01 {
+            float: right;
+            height: 68px;
+            width: 62px;
+        }
+
+        .create-dt01 button {
+            height: 69.5px;
+            width: 62px;
+            font-size: 25px
+        }
+
+        .create-dt02 {
+            float: right;
+            height: 68px;
+            width: 62px;
+        }
+
+        .create-dt02 input {
+            display: none;
+        }
+
+        .create-dt03 {
+            float: right;
+            height: 68px;
+            width: 82.9%;
+        }
+
+        .create-dt03 textarea {
+            height: 100%;
+            width: 100%;
+        }
+
+        .dt-img {
+            height: auto;
+            width: 100%;
+        }
+
+        .dt-img img {
+            height: 350px;
+            width: 400px;
+            margin: 2px 0 0 2px;
+        }
+
+        .chose-dt {
+            margin: 10px 0 0 0;
+            height: auto;
+            width: 100%;
+        }
+
+        .dt-content {
+            float: left;
+            margin: 10px 0 50px 0;
+            height: auto;
+            width: 100%;
+        }
+
+        .dt-content01 {
+            float: left;
+            margin: 10px 0 0 10px;
+            height: 50px;
+            width: 50px;
+        }
+
+        .dt-content01 img {
+            height: 50px;
+            width: 50px;
+        }
+
+        .dt-content02 {
+            float: left;
+            margin: 10px 0 0 10px;
+            height: 50px;
+            width: 90%;
+        }
+
+        .dt-content02 p {
+            margin: 2px 0 0 0;
+        }
+
+        .dt-content03 {
+            float: left;
+            margin: 10px 0 0 10px;
+            height: auto;
+            width: 98%;
+            font-size: 18px;
+        }
+
+        .dt-content04 {
+            float: left;
+            margin: 10px 0 0 10px;
+            height: auto;
+            width: 98%;
+        }
+
+        .dt-content04 img {
+            height: 300px;
+            width: 300px;
+        }
+
+        .dt-content05 {
+            float: left;
+            margin: 10px 0 0 10px;
+            height: auto;
+            width: 98%;
+        }
+
+        .dt-content05 .a1 {
+            float: right;
+            margin: 0 10px 0 0;
+        }
+
+        .dt-content05 .a2 {
+            margin: 0 0 0 500px;
+        }
+
+        .dt-content06 {
+            float: left;
+            margin: 10px 0 0 10px;
+            height: auto;
+            width: 98%;
+        }
+
+        .tpl-img {
+            float: left;
+            height: auto;
+            width: 45px;
+        }
+
+        .tpl-img img {
+            height: 45px;
+            width: 45px;
+        }
+
+        .tpl-content {
+            float: left;
+            height: auto;
+            width: 92%;
+            margin: 0 0 0 10px;
+        }
+
+        .p1 {
+            float: left;
+            font-size: 18px;
+        }
+
+        .p2 {
+            font-size: 18px;
+        }
+
+        .p3 {
+            float: left;
+            font-size: 16px;
+            margin: 5px 0 0 0;
+        }
+
+        .p4 {
+            margin: 5px 0 0 160px;
+        }
+
+        .p5 textarea {
+            width: 100%;
+        }
+
+        .hf {
+            float: left;
+            height: auto;
+            width: 92%;
+            margin: 10px 0 0 55px;
+        }
+
+        .hf-img {
+            float: left;
+            height: auto;
+            width: 45px;
+        }
+
+        .hf-img img {
+            height: 45px;
+            width: 45px;
+        }
+
+        .hf-content {
+            margin: 0 0 0 10px;
+            float: left;
+            height: auto;
+            width: 91.5%;
+        }
+
+        .fbpl {
+            height: auto;
+        }
+
+        .p6 {
+            width: 100%;
+        }
+
+        .p6 textarea {
+            margin: 50px 0 0 0;
+            width: 99.8%;
+            height: 60px;
+        }
+
+        .p6 input {
+            float: right;
+            width: 60px;
+        }
+
+        .wrap-sz {
+            float: left;
+            height: auto;
+            width: 15%;
+            background-color: rgba(0, 0, 0, 0.25);
+            margin: 1% 0 1% 3%;
+        }
+
+        .info {
+            margin: 20px 0 0 0;
+        }
+
+        select {
+            height: 40px;
+            width: 100%;
+            font-size: 16px;
+        }
+
+        /*弹框样式*/
+        .basic-admin {
+            color: black;
+            display: none;
+        }
+
+        .basic-detailed {
+            color: black;
+            display: none;
+        }
+
+        .layui-form-item {
+            margin: 20px 0 20px 120px;
+        }
+
+        .layui-input-block {
+            width: 50%;
+        }
+
+        .layui-input-block a {
+            margin: 0 0 0 20px;
+        }
+
+        .seldiv input {
+            margin-top: 8px;
+            margin-bottom: 9px;
+            vertical-align: middle;
+            zoom: 125%;
+        }
+
+        .select {
+            height: 36px;
+            width: 340px;
+        }
+
+        .layui-textarea {
+            width: 400px;
+        }
+
+        .showAdd {
+            margin-top: 20px;
+        }
+
+        .sel {
+            margin-top: 1px;
+            height: 38px;
+            width: 100%;
+        }
+
+        .btn {
+            margin-top: 1px;
+            width: 100%;
+        }
+
+        .sel-group {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .sel-groupings {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .move {
+            height: 38px;
+            width: 60%;
+
+        }
+
+    </style>
+</head>
+<body bgcolor="white">
+<div class="wrap" id="wrap">
+    <div class="wrap-tx">
+        <img :src="userBasicInfo.headPortrait" height="121" width="122">
+    </div>
+    <div class="wrap-ifo">{{ userBasicInfo.nickName }}
+        <span>
+            <p class="gxqm">{{ userBasicInfo.personalSignature }}</p>
+        </span>
+        <span class="user-ifo">
+            <p>{{ userBasicInfo.sex }}</p>
+            <p>{{ userBasicInfo.age }}</p>
+            <p>{{ userBasicInfo.constellation }}</p>
+            <p>{{ userBasicInfo.occupation }}</p>
+            <p>{{ userBasicInfo.whisper }}</p>
+        </span>
+    </div>
+    <div class="wrap-dz">
+        <img :src="userBasicInfo.headPortrait" height="121" width="122">
+    </div>
+    <div class="wrap-hy">
+        <div class="layui-collapse" lay-accordion>
+            <div class="layui-colla-item" v-for="(item01,grdex) in userGroup">
+                <h2 class="layui-colla-title">{{ item01.groupings }}</h2>
+                <div class="layui-colla-content" v-for="(item02,frdex) in item01.userFriendList">
+                    <div @mouseenter="iShow('ictl',grdex,frdex)" @mouseleave="iHide('ictl',grdex,frdex)">
+                        <a :href="'myqz02.html?accountNumber='+accountNumber+
+                        '&friendAccountNumber='+item02.friendAccountNumber">
+                            {{ item02.nickName }}
+                        </a>
+                        <div :id="'ictl'+grdex+frdex" style="float: right;display: none">
+                            <i class="layui-icon layui-icon-delete ia" @click="del(grdex,frdex)"></i>
+                            <i class="layui-icon layui-icon-export ib" @click="move(grdex,frdex)"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="wrap-dt">
+        <div class="create-dt">
+            <div class="create-dt01">
+                <button @click="dtUpdate">发表</button>
+            </div>
+            <div class="create-dt02">
+                <button class="layui-icon layui-icon-camera" style="font-size: 60px; color: gray;"
+                        @click="fileOpen"></button>
+                <input type="file" id="file" @change="imgShow">
+            </div>
+            <div class="create-dt03">
+                <textarea v-model="dtContent"></textarea>
+            </div>
+        </div>
+        <div class="dt-img" v-show="show">
+            <img :src="imgSrc">
+        </div>
+        <div class="chose-dt">
+            <select lay-verify="" v-model="selected" @change="dtChose">
+                <option value="">我的关注</option>
+                <option :value="item.groupings" v-for="(item,index) in userGroup">{{ item.groupings }}</option>
+            </select>
+        </div>
+        <div class="dt-content" v-for="(dt,dtdex) in userDt">
+            <div class="dt-content01">
+                <img :src="dt.headPortrait">
+            </div>
+            <div class="dt-content02">
+                <p style="font-size: 20px">{{ dt.nickName }}</p>
+                <p style="font-size: 15px">{{ dt.createTime }}</p>
+            </div>
+            <div class="dt-content03">
+                {{ dt.dtContent }}
+            </div>
+            <div class="dt-content04">
+                <img :src="dt.dtImg">
+            </div>
+            <div class="dt-content05">
+                <a :id="'b1'+dtdex" class="layui-icon layui-icon-dialogue a1"
+                   style="font-size: 28px;color: #b4b4b4;"
+                   @mouseenter="aChange('b1',dtdex)"
+                   @mouseleave="aRecovery('b1',dtdex)"
+                   @click="toFocus('b1',dtdex)">
+                    &nbsp;
+                </a>
+                <a :id="'b2'+dtdex" class="layui-icon layui-icon-praise a2"
+                   style="font-size: 28px; color: #b4b4b4;"
+                   @mouseenter="aChange('b2',dtdex)"
+                   @mouseleave="aRecovery('b2',dtdex)"
+                   @click.once="hot('b2',dtdex)">
+                    {{ dt.dtPopularity }}
+                </a>
+            </div>
+            <div class="dt-content06" v-for="(tpl,tpldex) in dt.userTplList">
+                <div class="tpl-img">
+                    <img :src="tpl.headPortrait">
+                </div>
+                <div class="tpl-content" @mouseenter="aShow(dtdex,tpldex,null)"
+                     @mouseleave="aHide(dtdex,tpldex,null)">
+                    <p class="p1">{{ tpl.nickName }}</p>
+                    <p class="p1">:</p>
+                    <p class="p2">{{ tpl.tplContent }}</p>
+                    <p class="p3">{{ tpl.createTime }}</p>
+                    <p class="p4">
+                        <a :id="'a'+dtdex+tpldex" @click="pShow(dtdex,tpldex,null)"
+                           class="layui-icon layui-icon-dialogue" style="color: white;display: none">
+                        </a>
+                    </p>
+                    <p :id="'p'+dtdex+tpldex" class="p5" style="display: none">
+                        <textarea :id="''+dtdex+tpldex" @blur="pHide(dtdex,tpldex,null)">
+                        </textarea>
+                        <input type="button" value="发表" @click="fbpl(dtdex,tpldex,null)">
+                    </p>
+                </div>
+                <div class="hf" v-for="(zpl,zpldex) in tpl.userZplList">
+                    <div class="hf-img">
+                        <img :src="zpl.headPortrait">
+                    </div>
+                    <div class="hf-content" @mouseenter="aShow(dtdex,tpldex,zpldex)"
+                         @mouseleave="aHide(dtdex,tpldex,zpldex)">
+                        <p class="p1">{{ zpl.leftNickName }}</p>
+                        <p class="p1" style="color: #FFFF00">回复</p>
+                        <p class="p1">{{ zpl.rightNickName }}</p>
+                        <p class="p1">:</p>
+                        <p class="p2">{{ zpl.zplContent }}</p>
+                        <p class="p3">{{ zpl.createTime }}</p>
+                        <p class="p4">
+                            <a :id="'a'+dtdex+tpldex+zpldex" @click="pShow(dtdex,tpldex,zpldex)"
+                               class="layui-icon layui-icon-dialogue" style="color: white;display: none"></a>
+                        </p>
+                        <p :id="'p'+dtdex+tpldex+zpldex" class="p5" style="display: none">
+                            <textarea :id="''+dtdex+tpldex+zpldex" @blur="pHide(dtdex,tpldex,zpldex)">
+                            </textarea>
+                            <input type="button" value="发表" @click="fbpl(dtdex,tpldex,zpldex)">
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="fbpl">
+                <p class="p6">
+                    <textarea :id="''+dtdex"></textarea>
+                    <input type="button" value="发表" @click="fbpl(dtdex,null,null)">
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="wrap-sz">
+        <div class="search">
+            <div class="layui-inline" style="width: 113.6px">
+                <input type="text" name="keyWord" id="keyWord" class="layui-input" autocomplete="off"
+                       placeholder="请输入用户名" v-model="friendAccountNumber">
+            </div>
+            <button class="layui-btn" @click="search">搜索</button>
+            <div class="showAdd" v-show="showAdd">
+                <div class="layui-inline" style="width: 100%">
+                    <input type="text" class="layui-input" v-model="nickName" readonly>
+                </div>
+                <div id="selGroup" class="selGroup">
+                    <select class="sel" v-model="defaultGroup">
+                        <option :value="sel.groupings" v-for="(sel, index) in userGroup" :key="index">
+                            {{sel.groupings}}
+                        </option>
+                    </select>
+                </div>
+                <button class="layui-btn btn" style="background: #1E9FFF" @click="add">添加</button>
+            </div>
+        </div>
+        <div class="info">
+            <button type="button" class="layui-btn layui-btn-fluid"
+                    style="background: white;color: black" @click="openTk01">
+                好友分组管理
+            </button>
+        </div>
+        <div>
+            <button type="button" class="layui-btn layui-btn-fluid"
+                    style="background: white;color: black" @click="openTk02">
+                个人基本资料
+            </button>
+        </div>
+        <div>
+            <button type="button" class="layui-btn layui-btn-fluid"
+                    style="background: white;color: black" @click="openTk03">
+                个人详细资料
+            </button>
+        </div>
+    </div>
+
+    <!-- 选择分组弹框 -->
+    <div id="group-move" class="group-move" style="display: none">
+        <h2 class="sel-group">选择分组</h2>
+        <div class="sel-groupings">
+            <select class="move" v-model="nowGroup">
+                <option :value="now.groupings" v-for="(now, index) in userGroup" :key="index">
+                    {{now.groupings}}
+                </option>
+            </select>
+        </div>
+    </div>
+
+    <!-- 好友分组管理弹出层 -->
+    <div id="group-admin" class="group-admin" style="display: none">
+        <div v-for="(group,index) in userGroup" style="margin-top: 10px">
+            <div class="layui-inline" style="width: 170px" v-if="index">
+                <input type="text" class="layui-input" v-model="group.groupings">
+            </div>
+            <input type="button" class="layui-btn layui-btn-fluid"
+                   style="width: 60px" value="修改" @click="userGroupUpd(index)" v-if="index">
+            <input type="button" class="layui-btn layui-btn-fluid"
+                   style="background: #ff0000;width: 60px;margin-left: 0" value="删除"
+                   @click="userGroupDel(index)" v-if="index">
+        </div>
+        <div style="margin-top: 10px">
+            <div class="layui-inline" style="width: 170px">
+                <input type="text" class="layui-input" placeholder="请输入你要添加的分组名" v-model="groupings">
+            </div>
+            <input type="button" class="layui-btn layui-btn-fluid" style="background: #1E9FFF;width: 123px;"
+                   value="添加分组" @click="userGroupAdd">
+        </div>
+    </div>
+
+    <!-- 个人基本信息管理弹出层 -->
+    <div id="basic-admin" class="basic-admin">
+        <div class="layui-form-item">
+            <label class="layui-form-label">昵称:</label>
+            <div class="layui-input-block">
+                <input type="text" name="title" required lay-verify="required" autocomplete="off"
+                       class="layui-input" v-model="userBasicInfo.nickName">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">个性签名:</label>
+            <div class="layui-input-block">
+                <input type="text" name="title" lay-verify="required" autocomplete="off" class="layui-input"
+                       v-model="userBasicInfo.personalSignature">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">性别:</label>
+            <div class="seldiv">
+                <input type="radio" name="sex" value="男" v-model="userBasicInfo.sex">男
+                <input type="radio" name="sex" value="女" v-model="userBasicInfo.sex">女
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">年龄:</label>
+            <div class="seldiv">
+                <select class="select" v-model="userBasicInfo.age">
+                    <option value="">请选择</option>
+                    <option :value="item" v-for="(item, index) in 100" :key="index">{{item}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">星座:</label>
+            <div class="seldiv">
+                <select class="select" v-model="userBasicInfo.constellation">
+                    <option value="">请选择</option>
+                    <option>白羊座</option>
+                    <option>金牛座</option>
+                    <option>双子座</option>
+                    <option>巨蟹座</option>
+                    <option>狮子座</option>
+                    <option>处女座</option>
+                    <option>天秤座</option>
+                    <option>天蝎座</option>
+                    <option>射手座</option>
+                    <option>摩羯座</option>
+                    <option>水瓶座</option>
+                    <option>双鱼座</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">职业:</label>
+            <div class="layui-input-block">
+                <input type="text" lay-verify="required" autocomplete="off" class="layui-input"
+                       v-model="userBasicInfo.occupation">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">悄悄话:</label>
+            <div class="layui-input-inline">
+                <textarea class="layui-textarea" v-model="userBasicInfo.whisper"></textarea>
+            </div>
+        </div>
+    </div>
+
+    <!-- 个人详细信息管理弹出层 -->
+    <div id="basic-detailed" class="basic-detailed">
+        <div class="layui-form-item">
+            <label class="layui-form-label">姓名:</label>
+            <div class="layui-input-block">
+                <input type="text" name="title" required lay-verify="required" autocomplete="off"
+                       class="layui-input" v-model="userDetailedInfo.name">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">兴趣:</label>
+            <div class="layui-input-block">
+                <input type="text" name="title" required lay-verify="required" autocomplete="off"
+                       class="layui-input" v-model="userDetailedInfo.interest">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">幸运数字:</label>
+            <div class="layui-input-block">
+                <input type="text" name="title" required lay-verify="required" autocomplete="off"
+                       class="layui-input" v-model="userDetailedInfo.luckyNumber">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">最喜欢的游戏:</label>
+            <div class="layui-input-block">
+                <input type="text" name="title" required lay-verify="required" autocomplete="off"
+                       class="layui-input" v-model="userDetailedInfo.favoriteGames">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">最喜欢的一道菜:</label>
+            <div class="layui-input-block">
+                <input type="text" name="title" required lay-verify="required" autocomplete="off"
+                       class="layui-input" v-model="userDetailedInfo.favoriteDishes">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">自我描述:</label>
+            <div class="layui-input-block">
+                <input type="text" name="title" required lay-verify="required" autocomplete="off"
+                       class="layui-input" v-model="userDetailedInfo.selfDescription">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">家乡:</label>
+            <div class="layui-input-block">
+                <input type="text" name="title" required lay-verify="required" autocomplete="off"
+                       class="layui-input" v-model="userDetailedInfo.hometown">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">电话:</label>
+            <div class="layui-input-block">
+                <input type="text" name="title" required lay-verify="required" autocomplete="off"
+                       class="layui-input" v-model="userDetailedInfo.phone">
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var vm = new Vue({
+        el: "#wrap",
+        data: {
+            //获取账号
+            accountNumber: "",
+
+            //动态更新
+            show: false,
+            dtContent: "",
+            imgSrc: "",
+            dt: {
+                id: "", accountNumber: "", createTime: "", dtContent: "", dtImg: "",
+                dtPopularity: null, headPortrait: "", nickName: "", userTplList: []
+            },
+            base64: "",
+
+            //选择dt的内容
+            selected: "",
+
+            //添加好友的账号
+            friendAccountNumber: "",
+            nickName: "",
+            showAdd: false,
+            defaultGroup : "我的好友",
+
+            //移动好友至指定分组
+            nowGroup: "",
+
+            //添加新分组的名称
+            groupings: "",
+
+            //页面初始化数据
+            userBasicInfo: {},
+            userDetailedInfo: {},
+            userGroup: [],
+            userDt: [],
+        },
+        beforeMount() {
+            var url = location.search //获取url中"?"符后的字串
+            var user = new Object()
+            if (url.indexOf('?') != -1) {
+                var str = url.substr(1) //substr()方法返回从参数值开始到结束的字符串；
+                var strs = str.split('&')
+                for (var i = 0; i < strs.length; i++) {
+                    user[strs[i].split('=')[0]] = strs[i].split('=')[1]
+                }
+            }
+            this.accountNumber = user.accountNumber;
+            this.getUserData();
+        },
+        methods: {
+            getUserData() {
+                var that = this;
+                axios.post('http://localhost:8888/myqz/dataUser/queryAll01?accountNumber='
+                    + this.accountNumber + '&selected=' + this.selected, {}
+                ).then(function (response) {
+                    that.userBasicInfo = response.data.userBasicInfo;
+                    that.userDetailedInfo = response.data.userDetailedInfo;
+                    that.userGroup = response.data.userGroup;
+                    that.userDt = response.data.userDt;
+                    //layui模块
+                    layui.use('form', function () {
+                        var form = layui.form;
+                    });
+                    layui.use('element', function () {
+                        //注意：折叠面板 依赖 element 模块，否则无法进行功能性操作
+                        var element = layui.element;
+                    });
+                }).catch(function (error) {
+                    console.log(error.data);
+                });
+            },
+            fileOpen() {
+                $("#file").click();
+            },
+            imgShow(e) {
+                var that = this;
+                var file = e.target.files[0];
+                if ((file.type).indexOf("image/") == -1) {
+                    layer.msg('请选择图片文件', {
+                        icon: 5,//提示的样式
+                        time: 2000,
+                    });
+                } else {
+                    var reader = new FileReader();
+                    reader.readAsDataURL(file);
+                    reader.onload = function (e) {
+                        that.imgSrc = this.result;
+                        that.show = true;
+                        that.base64 = this.result.substring(this.result.indexOf(',') + 1);
+                    }
+                }
+            },
+            getTime() {
+                var dt = new Date();
+                var y = dt.getFullYear();
+                var m = (dt.getMonth() + 1).toString().padStart(2, '0');
+                var d = dt.getDate().toString().padStart(2, '0');
+                var hh = dt.getHours().toString().padStart(2, '0');
+                var mm = dt.getMinutes().toString().padStart(2, '0');
+                var ss = dt.getSeconds().toString().padStart(2, '0');
+                return y + "/" + m + "/" + d + " " + hh + ":" + mm + ":" + ss;
+            },
+            dtUpdate() {
+                var that = this;
+                //获取时间
+                this.dt.accountNumber = this.accountNumber;
+                this.dt.createTime = this.getTime();
+                this.dt.dtContent = this.dtContent;
+                this.dt.dtImg = this.imgSrc;
+                this.dt.dtPopularity = 0;
+                this.dt.headPortrait = this.userBasicInfo.headPortrait;
+                this.dt.nickName = this.userBasicInfo.nickName;
+                axios.post('http://localhost:8888/myqz/dtData/insert', {
+                    accountNumber: that.accountNumber,
+                    createTime: that.dt.createTime,
+                    dtContent: that.dtContent,
+                    base64: that.base64
+                }).then(function (response) {
+                    that.userDt.unshift(that.dt);
+                    that.show = false;
+                    that.dtContent = null;
+                    console.log(response.data);
+                }).catch(function (error) {
+                    console.log(error);
+                });
+            },
+            fbpl(dtdex, tpldex, zpldex) {
+                var str = "" + dtdex;
+                if (tpldex != null) {
+                    str = str + tpldex;
+                    var rightAccountNumber = null;
+                    var rightNickName = null;
+                    if (zpldex != null) {
+                        str = str + zpldex;
+                        rightAccountNumber = this.userDt[dtdex].userTplList[tpldex].userZplList[zpldex].leftAccountNumber;
+                        rightNickName = this.userDt[dtdex].userTplList[tpldex].userZplList[zpldex].leftNickName;
+                    } else {
+                        rightAccountNumber = this.userDt[dtdex].userTplList[tpldex].accountNumber;
+                        rightNickName = this.userDt[dtdex].userTplList[tpldex].nickName;
+                    }
+                    //zpl
+                    var that = this;
+                    var zplContent = $("#" + str).val();
+                    var zpl = {
+                        id: "", tplId: this.userDt[dtdex].userTplList[tpldex].id,
+                        leftAccountNumber: this.accountNumber, rightAccountNumber: rightAccountNumber,
+                        zplContent: zplContent, createTime: this.getTime(),
+                        headPortrait: this.userBasicInfo.headPortrait,
+                        leftNickName: this.userBasicInfo.nickName, rightNickName: rightNickName
+                    };
+                    axios.post('http://localhost:8888/myqz/zplData/insert', {
+                        tplId: that.userDt[dtdex].userTplList[tpldex].id,
+                        leftAccountNumber: zpl.leftAccountNumber,
+                        rightAccountNumber: zpl.rightAccountNumber,
+                        createTime: zpl.createTime,
+                        zplContent: zplContent
+                    }).then(function (response) {
+                        that.userDt[dtdex].userTplList[tpldex].userZplList.push(zpl);
+                        $("#" + str).val("");
+                    }).catch(function (error) {
+                        console.log(error);
+                    });
+                } else {
+                    //tpl
+                    var that = this;
+                    var tplContent = $("#" + str).val();
+                    var tpl = {
+                        id: "", dtId: this.userDt[dtdex].id, accountNumber: this.accountNumber,
+                        tplContent: tplContent, createTime: this.getTime(),
+                        headPortrait: this.userBasicInfo.headPortrait, nickName: this.userBasicInfo.nickName,
+                        userZplList: []
+                    };
+                    axios.post('http://localhost:8888/myqz/tplData/insert', {
+                        dtId: that.userDt[dtdex].id,
+                        accountNumber: that.accountNumber,
+                        createTime: tpl.createTime,
+                        tplContent: tplContent
+                    }).then(function (response) {
+                        that.userDt[dtdex].userTplList.push(tpl);
+                        $("#" + str).val("");
+                    }).catch(function (error) {
+                        console.log(error);
+                    });
+                }
+            },
+            aChange(opt, dtdex) {
+                document.getElementById(opt + dtdex).style.color = "white";
+            },
+            aRecovery(opt, dtdex) {
+                document.getElementById(opt + dtdex).style.color = "#b4b4b4";
+            },
+            hot(opt, dtdex) {
+                var that = this;
+                axios.post('http://localhost:8888/myqz/dtData/update', {
+                    id: that.userDt[dtdex].id,
+                    accountNumber: that.accountNumber,
+                    createTime: that.userDt[dtdex].createTime,
+                    dtContent: that.userDt[dtdex].dtContent,
+                    dtImg: that.userDt[dtdex].dtImg,
+                    dtPopularity: parseInt(that.userDt[dtdex].dtPopularity) + 1
+                }).then(function (response) {
+                    that.userDt[dtdex].dtPopularity = parseInt(that.userDt[dtdex].dtPopularity) + 1;
+                }).catch(function (error) {
+                    console.log(error);
+                });
+            },
+            toFocus(opt, dtdex) {
+                document.getElementById(dtdex).focus();
+            },
+            iShow(opt,grdex,frdex) {
+                document.getElementById(opt+grdex+frdex).style.display = "block";
+            },
+            iHide(opt,grdex,frdex) {
+                document.getElementById(opt+grdex+frdex).style.display = "none";
+            },
+            aShow(dtdex, tpldex, zpldex) {
+                var str = "a" + dtdex + tpldex;
+                var accountNumber01 = this.userDt[dtdex].userTplList[tpldex].accountNumber;
+                if (zpldex != null) {
+                    str = str + zpldex;
+                    accountNumber01 = this.userDt[dtdex].userTplList[tpldex].userZplList[zpldex].leftAccountNumber;
+                }
+                if (this.accountNumber == accountNumber01) {
+                    return;
+                } else {
+                    document.getElementById(str).style.display = "block";
+                }
+            },
+            aHide(dtdex, tpldex, zpldex) {
+                var str = "a" + dtdex;
+                if (tpldex != null) {
+                    str = str + tpldex;
+                    if (zpldex != null) {
+                        str = str + zpldex;
+                    }
+                }
+                document.getElementById(str).style.display = "none";
+            },
+            pShow(dtdex, tpldex, zpldex) {
+                var str = "p" + dtdex;
+                var str1 = "" + dtdex;
+                if (tpldex != null) {
+                    str = str + tpldex;
+                    str1 = str1 + tpldex;
+                    if (zpldex != null) {
+                        str = str + zpldex;
+                        str1 = str1 + zpldex;
+                    }
+                }
+                document.getElementById(str).style.display = "block";
+                document.getElementById(str1).focus();
+            },
+            pHide(dtdex, tpldex, zpldex) {
+                var str = "p" + dtdex;
+                if (tpldex != null) {
+                    str = str + tpldex;
+                    if (zpldex != null) {
+                        str = str + zpldex;
+                    }
+                }
+                setTimeout(function () {
+                    document.getElementById(str).style.display = "none";
+                }, 100);
+            },
+            dtChose() {
+                this.getUserData();
+            },
+            openTk01() {
+                layer.open({
+                    type: 1,
+                    skin: "layui-layer-rim",
+                    area: ['300px', '360px'],
+                    title: ['好友分组管理'],
+                    content: $("#group-admin")
+                });
+            },
+            openTk02() {
+                var that = this;
+                layer.open({
+                    type: 1,
+                    skin: "layui-layer-rim",
+                    area: ['800px', '600px'],
+                    title: ['个人基本资料', 'text-align: center'],
+                    content: $("#basic-admin"),
+                    btn: ['提交', '取消'],
+                    yes: function (index) {
+                        axios.post('http://localhost:8888/myqz/infoBasic/updateUser', {
+                            accountNumber: that.accountNumber,
+                            nickName: that.userBasicInfo.nickName,
+                            personalSignature: that.userBasicInfo.personalSignature,
+                            sex: that.userBasicInfo.sex,
+                            age: that.userBasicInfo.age,
+                            constellation: that.userBasicInfo.constellation,
+                            occupation: that.userBasicInfo.occupation,
+                            whisper: that.userBasicInfo.whisper
+                        }).then(function (response) {
+                            layer.msg('修改成功！', {icon: 6, time: 1000});
+                        }).catch(function (response) {
+                            layer.msg('修改失败！', {icon: 5, time: 1000});
+                        });
+                        layer.closeAll();
+                    }
+                });
+            },
+            openTk03() {
+                var that = this;
+                layer.open({
+                    type: 1,
+                    skin: "layui-layer-rim",
+                    area: ['800px', '600px'],
+                    title: ['个人基本资料', 'text-align: center'],
+                    content: $("#basic-detailed"),
+                    btn: ['提交', '取消'],
+                    yes: function (index) {
+                        axios.post('http://localhost:8888/myqz/infoDetailed/updateUser', {
+                            accountNumber: that.accountNumber,
+                            name: that.userDetailedInfo.name,
+                            interest: that.userDetailedInfo.interest,
+                            luckyNumber: that.userDetailedInfo.luckyNumber,
+                            favoriteGames: that.userDetailedInfo.favoriteGames,
+                            favoriteDishes: that.userDetailedInfo.favoriteDishes,
+                            selfDescription: that.userDetailedInfo.selfDescription,
+                            hometown: that.userDetailedInfo.hometown,
+                            phone: that.userDetailedInfo.phone
+                        }).then(function (response) {
+                            layer.msg('修改成功！', {icon: 6, time: 1000});
+                        }).catch(function (response) {
+                            layer.msg('修改失败！', {icon: 5, time: 1000});
+                        });
+                        layer.closeAll();
+                    }
+                });
+            },
+            userGroupUpd(obj) {
+                axios.post('http://localhost:8888/myqz/group/update', {
+                    id: this.userGroup[obj].id,
+                    groupings: this.userGroup[obj].groupings
+                }).then(function (response) {
+                    layer.msg('修改成功！', {icon: 6, time: 1000});
+                }).catch(function (response) {
+                    layer.msg('修改失败！', {icon: 5, time: 1000});
+                })
+            },
+            userGroupDel(obj) {
+                var that = this;
+                layer.confirm("确认要删除吗", {title: "删除确认"}, function (index) {
+                    axios.post('http://localhost:8888/myqz/group/delete', {
+                        id: that.userGroup[obj].id,
+                        accountNumber: that.accountNumber,
+                        groupings: that.userGroup[obj].groupings
+                    }).then(function (response) {
+                        console.log(response.data);
+                        layer.msg('删除成功！', {icon: 6, time: 1000}, function () {
+                            that.getUserData();
+                        });
+                    }).catch(function (response) {
+                        layer.msg('删除失败！', {icon: 5, time: 1000});
+                    })
+                });
+            },
+            userGroupAdd() {
+                var that = this;
+                axios.post('http://localhost:8888/myqz/group/insert', {
+                    accountNumber: this.accountNumber,
+                    groupings: this.groupings
+                }).then(function (response) {
+                    that.getUserData();
+                    layer.msg('添加成功！', {icon: 6, time: 1000});
+                }).catch(function (response) {
+                    layer.msg('添加失败！', {icon: 5, time: 1000});
+                })
+            },
+            search() {
+                var that = this;
+                if (this.friendAccountNumber == null || this.friendAccountNumber == "") {
+                    layer.msg('请输入要添加的好友账号！', {icon: 7, time: 2000});
+                } else {
+                    axios.post('http://localhost:8888/myqz/infoBasic/queryUserYorN', {
+                        accountNumber: this.friendAccountNumber,
+                        headPortrait: this.accountNumber
+                    }).then(function (response) {
+                        if (response.data.msg == "1") {
+                            layer.msg(response.data.success, {icon: 7, time: 2000});
+                        }else {
+                            that.nickName = response.data.success.nickName;
+                            that.showAdd = true;
+                        }
+                    }).catch(function (response) {
+                        console.log(response.data);
+                    })
+                }
+            },
+            add() {
+                var that = this;
+                axios.post('http://localhost:8888/myqz/friend/insert', {
+                    accountNumber: this.accountNumber,
+                    friendAccountNumber: this.friendAccountNumber,
+                    groupings : this.defaultGroup
+                }).then(function (response) {
+                    that.getUserData();
+                    layer.msg('添加好友成功', {icon: 6, time: 2000});
+                    that.showAdd = false;
+                }).catch(function (response) {
+                    console.log(response.data);
+                })
+            },
+            move(grdex,frdex) {
+                var that = this;
+                if(this.userGroup[grdex].userFriendList[frdex].accountNumber == this.accountNumber) {
+                    return;
+                }
+                this.nowGroup = this.userGroup[grdex].groupings;
+                layer.open({
+                    type: 1,
+                    skin: "layui-layer-rim",
+                    area: ['300px', '260px'],
+                    title: ['对好友移动分组'],
+                    content: $("#group-move"),
+                    btn: ['提交', '取消'],
+                    yes: function (index) {
+                        axios.post('http://localhost:8888/myqz/friend/update', {
+                            id: that.userGroup[grdex].userFriendList[frdex].id,
+                            groupings : that.nowGroup
+                        }).then(function (response) {
+                            that.getUserData();
+                            layer.msg('移动分组成功', {icon: 6, time: 2000});
+                        }).catch(function (response) {
+                            console.log(response.data);
+                        });
+                        layer.closeAll();
+                    }
+                });
+            },
+            del(grdex,frdex) {
+                var that = this;
+                if(this.userGroup[grdex].userFriendList[frdex].accountNumber == this.accountNumber) {
+                    return;
+                }
+                layer.confirm("确认要删除"+this.userGroup[grdex].userFriendList[frdex].nickName+"吗",
+                    {title: "删除确认"}, function (index) {
+                    axios.post('http://localhost:8888/myqz/friend/delete?id='
+                        +that.userGroup[grdex].userFriendList[frdex].id, {
+                    }).then(function (response) {
+                        that.getUserData();
+                        layer.msg('删除好友成功', {icon: 6, time: 2000});
+                    }).catch(function (response) {
+                        console.log(response.data);
+                    })
+                });
+            }
+        },
+
+    });
+</script>
+</body>
+</html>

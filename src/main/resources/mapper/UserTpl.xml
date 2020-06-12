@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lhn.myqz.dao.UserTplDao">
+    <select id="queryUserTplByAccountNumber" resultType="com.lhn.myqz.entity.UserTpl">
+        select tpl.id, tpl.dt_id, tpl.account_number, info.head_portrait,
+               info.nick_name, tpl.create_time, tpl.tpl_content
+        from tb_user_basic_info info,tb_user_tpl tpl
+        where tpl.account_number = info.account_number
+        order by tpl.id asc
+    </select>
+    <insert id="insertUserTpl" parameterType="com.lhn.myqz.entity.UserTpl">
+        insert into tb_user_tpl(
+            dt_id,account_number,tpl_content,create_time
+        )
+        values(
+            #{dtId},#{accountNumber},#{tplContent},#{createTime}
+        )
+	</insert>
+
+    <delete id="deleteUserTpl" parameterType="java.lang.Integer">
+
+    </delete>
+</mapper>
